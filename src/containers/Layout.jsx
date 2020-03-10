@@ -69,18 +69,14 @@ class MainLayout extends Component {
 
       localStorage.removeItem("staffList", newList);
 
-      localStorage.setItem("staffList", JSON.stringify(newList));
-
-      this.setState({ newList });
-
       this.setState({ editted: "", staffIndex: "" });
     } else {
       newList.push(list);
-
-      localStorage.setItem("staffList", JSON.stringify(newList));
-
-      this.setState({ newList });
     }
+
+    localStorage.setItem("staffList", JSON.stringify(newList));
+
+    this.setState({ newList });
   };
 
   render() {
