@@ -20,7 +20,7 @@ class Staff extends Component {
             <List.Item.Meta
               title={
                 <span className="d-flex">
-                  <span className="w-50">
+                  <span className="w-50 text-capitalize">
                     {item.firstName} {item.lastName}
                   </span>
                   <Actions
@@ -34,7 +34,7 @@ class Staff extends Component {
               }
               description={<a href={`mailto:${item.email}`}>{item.email}</a>}
             />
-            <p>Position: {item.position}</p>
+            <p className="text-capitalize">Position: {item.position}</p>
             <p>
               Salary: <i className="fa fa-naira"></i>
               {this.numberWithCommas(`${item.salary}`)}

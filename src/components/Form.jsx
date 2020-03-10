@@ -93,8 +93,8 @@ class Form extends Component {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
+          <button type="submit" className="btn btn-dark">
+            {this.props.buttonOptn}
           </button>
         </form>
       </>

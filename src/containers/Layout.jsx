@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 class MainLayout extends Component {
   state = {
     staffList: JSON.parse(localStorage.getItem("staffList")) || [],
+    btnOption: "Add Staff",
     staffIndex: "",
     editted: ""
   };
@@ -44,6 +45,8 @@ class MainLayout extends Component {
     document.querySelector("#salary").value = `${edit.salary}`;
 
     document.querySelector("#firstName").focus();
+
+    this.setState({ btnOption: "Update Details" });
   };
 
   addStaff = (theFirstName, theLastName, theEmail, thePosition, theSalary) => {
@@ -69,7 +72,7 @@ class MainLayout extends Component {
 
       localStorage.removeItem("staffList", newList);
 
-      this.setState({ editted: "", staffIndex: "" });
+      this.setState({ editted: "", staffIndex: "", btnOption: "Add Staff" });
     } else {
       newList.push(list);
     }
@@ -82,10 +85,23 @@ class MainLayout extends Component {
   render() {
     return (
       <>
-        <div className="container p-5">
+        <div className="container p-4">
+          <div className="row">
+            <div className="col-12 mb-3">
+              <h3 className="text-center text-dark text-capitalize">
+                staff management system
+              </h3>
+            </div>
+          </div>
           <div className="row">
             <div className="col-md-6">
-              <Form addStaff={this.addStaff} />
+              <h4 className="text-center text-dark text-capitalize mb-4">
+                enter staff details
+              </h4>
+              <Form
+                addStaff={this.addStaff}
+                buttonOptn={this.state.btnOption}
+              />
             </div>
             <div className="col-md-6" id="staffSide">
               <Staff
