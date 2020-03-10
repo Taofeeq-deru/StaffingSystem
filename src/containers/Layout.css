@@ -1,0 +1,23 @@
+#staffSide {
+  border-left: 1px solid black;
+  height: 80vh;
+  overflow-y: scroll;
+}
+#staffSide::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  /* padding: 1px; */
+}
+#staffSide::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+#staffSide::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 10px;
+  /* width: 5px; */
+}
+#staffSide::-webkit-scrollbar-thumb:hover {
+  background: #0264cc;
+  cursor: pointer;
+}

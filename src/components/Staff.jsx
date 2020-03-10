@@ -6,6 +6,10 @@ import Actions from "./Actions";
 class Staff extends Component {
   state = {};
 
+  numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   render() {
     return (
       <List
@@ -15,19 +19,26 @@ class Staff extends Component {
           <List.Item actions={[]} id={item.firstName}>
             <List.Item.Meta
               title={
-                <span>
-                  {item.firstName} {item.lastName}
+                <span className="d-flex">
+                  <span className="w-50">
+                    {item.firstName} {item.lastName}
+                  </span>
                   <Actions
                     itemID={item.id}
                     deleteItem={this.props.delete}
                     editItem={this.props.edit}
+                    className="ml-auto"
+                    item={item}
                   />
                 </span>
               }
               description={<a href={`mailto:${item.email}`}>{item.email}</a>}
             />
             <p>Position: {item.position}</p>
-            <p>Salary: #{item.salary}</p>
+            <p>
+              Salary: <i className="fa fa-naira"></i>
+              {this.numberWithCommas(`${item.salary}`)}
+            </p>
           </List.Item>
         )}
       />
