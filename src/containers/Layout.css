@@ -13,11 +13,11 @@
   border-radius: 10px;
 }
 #staffSide::-webkit-scrollbar-thumb {
-  background: #007bff;
+  background: #343a40;
   border-radius: 10px;
   /* width: 5px; */
 }
 #staffSide::-webkit-scrollbar-thumb:hover {
-  background: #0264cc;
+  background: #000000;
   cursor: pointer;
 }
