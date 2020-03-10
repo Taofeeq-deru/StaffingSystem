@@ -94,7 +94,7 @@ class MainLayout extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-6 mb-5">
               <h4 className="text-center text-dark text-capitalize mb-4">
                 enter staff details
               </h4>
