@@ -2,3 +2,8 @@ i:hover {
   cursor: pointer;
   font-size: smaller;
 }
+.fa-naira:before {
+  font-weight: 700;
+  font-family: "Raleway", sans-serif;
+  content: "₦";
+}

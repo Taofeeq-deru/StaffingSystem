@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//import ModalClass from "./Modal";
 
 class Actions extends Component {
   state = {};
@@ -12,7 +13,7 @@ class Actions extends Component {
   render() {
     return (
       <>
-        <span className="ml-5 pl-5 actions" theId={this.props.itemID}>
+        <span className="actions d-flex" theid={this.props.itemID}>
           <i
             className="fa fa-edit text-info fa-xs mr-2 edit"
             onClick={this.handleEdit}

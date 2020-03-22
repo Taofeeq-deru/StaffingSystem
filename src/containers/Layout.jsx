@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import "./Layout.css";
 import Staff from "../components/Staff";
+import Form from "../components/Form";
+import { v4 as uuidv4 } from "uuid";
 
 class MainLayout extends Component {
   state = {
-    staffList: JSON.parse(localStorage.getItem("staffList")) || []
+    staffList: JSON.parse(localStorage.getItem("staffList")) || [],
+    btnOption: "Add Staff",
+    staffIndex: "",
+    editted: ""
   };
 
   deleteStaff = (id) => {
@@ -26,11 +32,11 @@ class MainLayout extends Component {
 
     const edit = newList.find((list) => list.id === id);
 
-    console.log(edit.firstName);
+    this.setState({ editted: "yes" });
 
     const index = newList.indexOf(edit);
 
-    newList.splice(index, 1);
+    this.setState({ staffIndex: index });
 
     document.querySelector("#firstName").value = `${edit.firstName}`;
     document.querySelector("#lastName").value = `${edit.lastName}`;
@@ -40,20 +46,18 @@ class MainLayout extends Component {
 
     document.querySelector("#firstName").focus();
 
-    localStorage.removeItem("staffList", newList);
+    this.setState({ btnOption: "Update Details" });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const firstName = e.target.elements.firstName.value;
-    const lastName = e.target.elements.lastName.value;
-    const email = e.target.elements.email.value;
-    const position = e.target.elements.position.value;
-    const salary = e.target.elements.salary.value;
-    //console.log(firstName, lastName, email, position, salary);
+  addStaff = (theFirstName, theLastName, theEmail, thePosition, theSalary) => {
+    const firstName = theFirstName;
+    const lastName = theLastName;
+    const email = theEmail;
+    const position = thePosition;
+    const salary = theSalary;
 
     const list = {
-      id: firstName,
+      id: uuidv4(),
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -63,73 +67,43 @@ class MainLayout extends Component {
 
     let newList = this.state.staffList;
 
-    newList.push(list);
+    if (this.state.editted === "yes") {
+      newList[this.state.staffIndex] = list;
+
+      localStorage.removeItem("staffList", newList);
+
+      this.setState({ editted: "", staffIndex: "", btnOption: "Add Staff" });
+    } else {
+      newList.push(list);
+    }
 
     localStorage.setItem("staffList", JSON.stringify(newList));
 
     this.setState({ newList });
-
-    console.log(this.state.staffList);
   };
 
   render() {
     return (
       <>
-        <div className="container p-5">
+        <div className="container p-4">
           <div className="row">
-            <div className="col-md-6">
-              <form action="" className="form" onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    placeholder="First Name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    placeholder="Last Name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="form-control"
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="position"
-                    id="position"
-                    placeholder="Position"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="form-control"
-                    type="number"
-                    name="salary"
-                    id="salary"
-                    placeholder="Salary"
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </form>
+            <div className="col-12 mb-3">
+              <h3 className="text-center text-dark text-capitalize">
+                staff management system
+              </h3>
             </div>
-            <div className="col-md-6" style={{ borderLeft: "1px solid black" }}>
+          </div>
+          <div className="row">
+            <div className="col-md-6 mb-5">
+              <h4 className="text-center text-dark text-capitalize mb-4">
+                enter staff details
+              </h4>
+              <Form
+                addStaff={this.addStaff}
+                buttonOptn={this.state.btnOption}
+              />
+            </div>
+            <div className="col-md-6" id="staffSide">
               <Staff
                 listOfStaff={this.state.staffList}
                 delete={this.deleteStaff}
